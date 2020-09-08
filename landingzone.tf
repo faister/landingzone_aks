@@ -1,9 +1,6 @@
 #
 # Deploy Azure Kubernetes Services with RBAC enabled with Azure Active Directory
 #
-
-
-
 module "acr" {
     source  = "./acr"
     for_each      = var.registries

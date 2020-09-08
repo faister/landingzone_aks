@@ -55,19 +55,19 @@ vnets = {
         name     = "aks_nodepool_system"
         cidr     = ["10.20.100.0/25"]
         nsg_name = "aks_nodepool_system_nsg"
-        nsg      = []
-      }
-      aks_nodepool_system1 = {
-        name     = "aks_nodepool_system1"
-        cidr     = ["10.20.100.128/25"]
-        nsg_name = "aks_nodepool_system1_nsg"
-        nsg      = []
-      }
-      aks_nodepool_user1 = {
-        name     = "aks_nodepool_user1"
-        cidr     = ["10.20.101.0/25"]
-        nsg_name = "aks_nodepool_user1_nsg"
-        nsg      = []
+        nsg      = [
+          {
+            name                       = "aks-out-sea",
+            priority                   = "120"
+            direction                  = "Outbound"
+            access                     = "Allow"
+            protocol                   = "tcp"
+            source_port_range          = "*"
+            destination_port_range     = "443"
+            source_address_prefix      = "*"
+            destination_address_prefix = "AzureCloud.SoutheastAsia"
+          }
+        ]
       }
     }
   }
@@ -220,10 +220,8 @@ route_tables = {
     name = "spoke_aks_sg_to_hub_sg"
     resource_group_key = "vnet_sg"
 
-    vnet_keys = {
-      "spoke_aks_sg" = {
-        subnet_keys = ["aks_nodepool_system","aks_nodepool_user1"]
-      }
+    vnet_subnet_keys = {
+      "spoke_aks_sg" = ["aks_nodepool_system"]
     }
     
     route_entries = {

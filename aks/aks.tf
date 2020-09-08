@@ -58,7 +58,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     for_each = var.aks.default_node_pool == null ? [0] : [1]
 
     content {
-      name                  = azurecaf_naming_convention.default_node_pool.result
+      name                  = lookup(var.aks.default_node_pool, "name", azurecaf_naming_convention.default_node_pool.result)
       vm_size               = var.aks.default_node_pool.vm_size
       type                  = lookup(var.aks.default_node_pool, "type", "VirtualMachineScaleSets")
       os_disk_size_gb       = lookup(var.aks.default_node_pool, "os_disk_size_gb", null)
@@ -69,6 +69,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
       max_pods              = lookup(var.aks.default_node_pool, "max_pods", 30)
       node_labels           = lookup(var.aks.default_node_pool, "node_labels", null)
       node_taints           = lookup(var.aks.default_node_pool, "node_taints", null)
+      orchestrator_version  = lookup(var.aks.default_node_pool, "orchestrator_version", var.aks.kubernetes_version)
       vnet_subnet_id        = var.subnet_ids[var.aks.default_node_pool.subnet_key]
 
       tags = merge(local.tags, lookup(var.aks.default_node_pool, "tags", {}))

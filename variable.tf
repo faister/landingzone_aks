@@ -34,4 +34,6 @@ variable landingzone_tag {
 }
 
 variable resource_groups {}
-variable registries {}
+variable registries {
+  default = {}
+}

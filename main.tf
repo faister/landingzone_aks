@@ -23,7 +23,6 @@ terraform {
       version = "~> 2.1.0"
     }
   }
-
 }
 
 provider "azurecaf" {
@@ -56,7 +55,6 @@ data "terraform_remote_state" "landingzone_caf_foundations" {
   }
 }
 
-
 locals {
   landingzone_tag = {
     "landingzone" = var.landingzone_tag == null ? basename(abspath(path.root)) : var.landingzone_tag
@@ -69,5 +67,3 @@ locals {
   caf_foundations_accounting = data.terraform_remote_state.landingzone_caf_foundations.outputs.foundations_accounting
   vnets                   = data.terraform_remote_state.landingzone_networking.outputs.vnets
 }
-
-

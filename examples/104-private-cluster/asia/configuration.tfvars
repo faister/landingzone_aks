@@ -9,13 +9,8 @@ resource_groups = {
   }
 }
 
-helms = {
-  flux = { version = "1.0" }
-  podIdentity = {}
-}
 clusters = {
   seacluster = {
-    helm_keys = ["flux", "podIdentify"]
     name                = "akscluster-001"
     resource_group_key = "aks1"
     os_type             = "Linux"
@@ -57,34 +52,6 @@ clusters = {
         "project" = "system services"
       }
     }
-
-    node_pools = {
-      pool1 = {
-        name                 = "nodepool1"
-        mode                 = "User"
-        subnet_key          = "aks_nodepool_user1"
-        max_pods             = 30
-        vm_size              = "Standard_DS2_v2"
-        node_count           = 2
-        enable_auto_scaling  = false
-        os_disk_size_gb      = 512
-        orchestrator_version = "1.17.7"
-        tags = {
-          "project" = "user services"
-        }
-      }
-    }
-  }
-}
-
-registries = {
-  seaacr = {
-    name                = "acr-001"
-    resource_group_key  = "aks-1"
-    cluster_keys = ["seacluster"]
-    sku                      = "Premium"
-    admin_enabled            = false
-    georeplication_locations = ["eastasia"]
   }
 }
 

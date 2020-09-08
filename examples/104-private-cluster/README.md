@@ -22,8 +22,8 @@ rover login -t [TENANT_ID/TENANT_NAME] -s [SUBSCRIPTION_GUID]
 # Environment is needed to be defined, otherwise the below LZs will land into sandpit which someone else is working on
 export TF_VAR_environment=hieu
 # Set the folder name of this example
-example=104-private-cluster
-path=$example/asia
+example=htx-104-private-cluster
+path=104-private-cluster/asia
 ```
 
 ### 2. Apply Landingzones

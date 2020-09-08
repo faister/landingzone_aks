@@ -49,7 +49,7 @@ rover -lz /tf/caf/landingzones/landingzone_networking/ \
 # Run AKS landing zone deployment
 rover -lz /tf/caf/ \
       -tfstate ${example}_landingzone_aks.tfstate \
-      -var-file /tf/caf/examples/${example}/configuration.tfvars \
+      -var-file /tf/caf/examples/${example}/blue.tfvars \
       -var tfstate_landingzone_networking=${example}_landingzone_networking.tfstate \
       -var landingzone_tag=${example}_landingzone_aks \
       -a apply
